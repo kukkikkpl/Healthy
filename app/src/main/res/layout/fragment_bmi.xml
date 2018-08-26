@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:drawableLeft="@drawable/ic_height"
+                android:hint="@string/height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/bmi_height"
+                />
+
+            <EditText
+                android:drawableLeft="@drawable/ic_weight"
+                android:hint="@string/weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/bmi_weight"
+                />
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculate"
+                android:id="@+id/bmi_calculate_btn"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your BMI"
+                android:textSize="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="35dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:id="@+id/bmi_bmi_value"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
