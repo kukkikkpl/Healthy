@@ -51,8 +51,8 @@ public class LoginFragment extends Fragment {
                     ).show();
                     Log.d("USER", "USER OR PASSWORD IS EMPTY");
                 } else if (_userIdStr.equals("admin") && _passwordStr.equals("admin")) {
-                    Log.d("USER","GO TO BMI");
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
+                    Log.d("USER","GO TO MENU");
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
                 } else {
                     Toast.makeText(
                             getActivity(),

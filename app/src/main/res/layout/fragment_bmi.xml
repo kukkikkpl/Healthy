@@ -13,6 +13,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/bmi_back_btn"
+                android:layout_margin="10dp"/>
+
             <EditText
                 android:drawableLeft="@drawable/ic_height"
                 android:hint="@string/height"
@@ -51,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00"
+                android:text="26.55"
                 android:textSize="35dp"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"

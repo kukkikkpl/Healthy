@@ -63,4 +63,14 @@ public class BMIFragment extends Fragment {
         });
 
     }
+
+    void initBackBtn(){
+        Button backBtn = (Button) getView().findViewById(R.id.bmi_back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
+            }
+        });
+    }
 }
