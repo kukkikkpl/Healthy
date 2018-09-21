@@ -1,5 +1,6 @@
-package com.example.lab203_40.healthy;
+package com.example.kukkik.healthy;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,11 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by LAB203_40 on 20/8/2561.
- */
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment {
+    private FirebaseAuth fbAuth;
 
     @Nullable
     @Override
@@ -30,11 +34,14 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initLoginBtn();
-        initRegisterBtn();
+        fbAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = fbAuth.getCurrentUser();
+            initLoginBtn();
+            initRegisterBtn();
+
     }
 
-    void initLoginBtn(){
+    void initLoginBtn() {
         Button _loginBtn = (Button) getView().findViewById(R.id.login_login_btn); //
         _loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,37 +50,59 @@ public class LoginFragment extends Fragment {
                 EditText _password = (EditText) getView().findViewById(R.id.login_password);
                 String _userIdStr = _userId.getText().toString();
                 String _passwordStr = _password.getText().toString();
-                if (_userIdStr.isEmpty() || _passwordStr.isEmpty()){
+                if (_userIdStr.isEmpty() || _passwordStr.isEmpty()) {
                     Toast.makeText(
                             getActivity(),
                             "กรุณาระบุ User หรือ Password",
                             Toast.LENGTH_SHORT
                     ).show();
                     Log.d("USER", "USER OR PASSWORD IS EMPTY");
-                } else if (_userIdStr.equals("admin") && _passwordStr.equals("admin")) {
-                    Log.d("USER","GO TO MENU");
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
                 } else {
-                    Toast.makeText(
-                            getActivity(),
-                            "User หรือ Password ไม่ถูกต้อง",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    Log.d("USER","INVALID USER OR PASSWORD");
+                    signIn(_userIdStr, _passwordStr);
                 }
             }
         });
     }
 
-    void initRegisterBtn(){
+    void initRegisterBtn() {
         TextView _registerBtn = (TextView) getView().findViewById(R.id.login_register_btn);
         _registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).addToBackStack(null).commit();
-                Log.d("USER","GO TO REGISTER");
+                Log.d("USER", "GO TO REGISTER");
             }
         });
 
     }
+
+    private void signIn(String email, String password) {
+
+            fbAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    FirebaseUser user = fbAuth.getCurrentUser();
+                    if (user.isEmailVerified()) {
+                        Log.d("USER", "GO TO MENU");
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
+                    }
+                    else {
+                        Toast.makeText(
+                                getActivity(),
+                                "User นี้ยังไม่ได้ทำการ Confirm Email",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        Log.d("USER", "EMAIL IS NOT VERIFIED");
+                        fbAuth.signOut();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("USER", "ERROR IN SIGNIN");
+                }
+            });
+
+    }
+
 }

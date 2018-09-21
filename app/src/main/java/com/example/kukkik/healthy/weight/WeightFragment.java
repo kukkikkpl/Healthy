@@ -1,4 +1,4 @@
-package com.example.lab203_40.healthy.weight;
+package com.example.kukkik.healthy.weight;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.lab203_40.healthy.R;
+import com.example.kukkik.healthy.R;
+import com.example.kukkik.healthy.WeightFormFragment;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class WeightFragment extends Fragment {
         ListView _weightList = (ListView) getView().findViewById(R.id.weight_list);
         WeightAdapter _weightAdapter = new WeightAdapter(getActivity(), R.layout.fragment_weight_item, weights);
         _weightList.setAdapter(_weightAdapter);
+        initAddWeightBtn();
 
     }
 
@@ -36,5 +39,15 @@ public class WeightFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_weight, container, false);
+    }
+
+    void initAddWeightBtn(){
+        TextView _backBtn = (TextView) getView().findViewById(R.id.weight_add_weight_btn);
+        _backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
+            }
+        });
     }
 }

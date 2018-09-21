@@ -1,6 +1,5 @@
-package com.example.lab203_40.healthy;
+package com.example.kukkik.healthy;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,6 +14,5 @@ public class MainActivity extends AppCompatActivity {
                     .beginTransaction()
                     .replace(R.id.main_view, new LoginFragment()).commit();
         }
-        //setContentView(R.layout.fragment_login);
     }
 }

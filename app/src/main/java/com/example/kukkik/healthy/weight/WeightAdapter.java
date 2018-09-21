@@ -1,4 +1,4 @@
-package com.example.lab203_40.healthy.weight;
+package com.example.kukkik.healthy.weight;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.lab203_40.healthy.R;
-import com.example.lab203_40.healthy.weight.Weight;
+import com.example.kukkik.healthy.R;
+import com.example.kukkik.healthy.weight.Weight;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,11 @@ public class WeightAdapter extends ArrayAdapter<Weight> {
         View _weightItem = LayoutInflater.from(context).inflate(R.layout.fragment_weight_item, parent, false);
         TextView _date = (TextView) _weightItem.findViewById(R.id.weight_item_date);
         TextView _weight = (TextView) _weightItem.findViewById(R.id.weight_item_weight);
+        TextView _status = (TextView) _weightItem.findViewById(R.id.weight_item_status);
         Weight _row = weights.get(position);
         _date.setText(_row.getDate());
         _weight.setText(String.valueOf(_row.getWeight()));
+        _status.setText(_row.getStatus());
         return _weightItem;
     }
 }

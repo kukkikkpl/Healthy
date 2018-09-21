@@ -5,6 +5,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Add"
         android:id="@+id/weight_add_weight_btn"/>
     <ListView
         android:id="@+id/weight_list"

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     android:weightSum="1"
     android:orientation="vertical">
 
@@ -17,48 +16,48 @@
             android:orientation="vertical">
 
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:srcCompat="@drawable/login_logo"
-            android:id="@+id/imageView"
-            android:layout_weight="0.04"
-            android:layout_gravity="center"
-            />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/login_logo"
+                android:id="@+id/imageView"
+                android:layout_weight="0.04"
+                android:layout_gravity="center"
+                />
 
-        <EditText
-            android:drawableLeft="@drawable/ic_action_name"
-            android:hint="@string/user_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:id="@+id/login_user_id"
-            />
+            <EditText
+                android:drawableLeft="@drawable/ic_action_name"
+                android:hint="@string/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:id="@+id/login_user_id"
+                />
 
-        <EditText
-            android:drawableLeft="@drawable/ic_lock"
-            android:hint="@string/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/login_password"
-            />
+            <EditText
+                android:drawableLeft="@drawable/ic_lock"
+                android:hint="@string/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/login_password"
+                />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/login_login_btn"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:id="@+id/login_login_btn"/>
 
-        <TextView
-            android:id="@+id/login_register_btn"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register New Account"
-            android:layout_gravity="end"/>
+            <TextView
+                android:id="@+id/login_register_btn"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register New Account"
+                android:layout_gravity="end"/>
 
         </LinearLayout>
 
     </ScrollView>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

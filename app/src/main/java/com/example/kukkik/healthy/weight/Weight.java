@@ -1,4 +1,4 @@
-package com.example.lab203_40.healthy.weight;
+package com.example.kukkik.healthy.weight;
 
 /**
  * Created by LAB203_40 on 27/8/2561.

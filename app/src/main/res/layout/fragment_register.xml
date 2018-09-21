@@ -16,30 +16,13 @@
 
             <EditText
                 android:drawableLeft="@drawable/ic_action_name"
-                android:hint="@string/user_id"
+                android:hint="@string/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:id="@+id/register_user_id"
+                android:id="@+id/register_email"
                 />
 
-            <EditText
-                android:drawableLeft="@drawable/ic_name"
-                android:hint="@string/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/register_name"
-                />
-
-            <EditText
-                android:drawableLeft="@drawable/ic_age"
-                android:hint="@string/age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:id="@+id/register_age"
-                />
 
             <EditText
                 android:drawableLeft="@drawable/ic_lock"
@@ -50,6 +33,15 @@
                 android:id="@+id/register_password"
                 />
 
+            <EditText
+                android:drawableLeft="@drawable/ic_lock"
+                android:hint="@string/re_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/register_re_password"
+                />
+
             <Button
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
@@ -58,7 +50,7 @@
                 android:id="@+id/register_register_btn"
                 />
 
-         </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

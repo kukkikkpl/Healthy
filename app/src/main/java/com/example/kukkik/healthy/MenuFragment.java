@@ -1,4 +1,4 @@
-package com.example.lab203_40.healthy;
+package com.example.kukkik.healthy;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.lab203_40.healthy.weight.WeightFragment;
+import com.example.kukkik.healthy.weight.WeightFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -20,16 +22,19 @@ import java.util.ArrayList;
  */
 
 public class MenuFragment extends Fragment {
+    private FirebaseAuth fbAuth;
 
     ArrayList<String> menu = new ArrayList<>();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        fbAuth = FirebaseAuth.getInstance();
         menu.clear();
         menu.add("BMI");
         menu.add("Weight");
         menu.add("Setup");
+        menu.add("Sign out");
         ListView menuList = (ListView) getView().findViewById(R.id.menu_list);
         final ArrayAdapter<String> menuAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -45,6 +50,9 @@ public class MenuFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
                 } else if (menu.get(position).equals("Weight")) {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
+                } else if (menu.get(position).equals("Sign out")){
+                    fbAuth.signOut();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
                 }
                 //menu.add("new value");
                 //menuAdapter.notifyDataSetChanged();

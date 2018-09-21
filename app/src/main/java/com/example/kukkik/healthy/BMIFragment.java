@@ -1,4 +1,4 @@
-package com.example.lab203_40.healthy;
+package com.example.kukkik.healthy;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
