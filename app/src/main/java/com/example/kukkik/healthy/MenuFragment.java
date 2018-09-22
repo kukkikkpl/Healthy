@@ -45,14 +45,27 @@ public class MenuFragment extends Fragment {
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MENU", "Select " + menu.get(position));
+                //Log.d("MENU", "Select " + menu.get(position));
                 if (menu.get(position).equals("BMI")) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new BMIFragment())
+                            .addToBackStack(null).commit();
                 } else if (menu.get(position).equals("Weight")) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
-                } else if (menu.get(position).equals("Sign out")){
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new WeightFragment())
+                            .addToBackStack(null).commit();
+                } else if (menu.get(position).equals("Sign out")) {
                     fbAuth.signOut();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
+                    Log.d("USER", "SIGN OUT");
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new LoginFragment())
+                            .addToBackStack(null).commit();
                 }
                 //menu.add("new value");
                 //menuAdapter.notifyDataSetChanged();

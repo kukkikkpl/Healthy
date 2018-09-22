@@ -32,6 +32,7 @@ public class BMIFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initCalculateBtn();
+        initBackBtn();
     }
 
     void initCalculateBtn(){
@@ -54,6 +55,7 @@ public class BMIFragment extends Fragment {
                     double _heightDouble = Double.parseDouble(_heightStr);
                     double _weightDouble = Double.parseDouble(_weightStr);
                     double bmi = _weightDouble/(_heightDouble*_heightDouble);
+                    bmi = Math.round(bmi * 100d)/100d;
                     TextView bmiText = (TextView) getView().findViewById(R.id.bmi_bmi_value);
                     bmiText.setText(String.valueOf(bmi));
                     Log.d("BMI","BMI IS VALUE");

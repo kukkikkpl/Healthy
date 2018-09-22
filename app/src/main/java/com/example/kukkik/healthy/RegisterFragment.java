@@ -42,7 +42,7 @@ public class RegisterFragment extends Fragment {
         initRegisterNewAccountBtn();
     }
 
-    void initRegisterNewAccountBtn(){
+    void initRegisterNewAccountBtn() {
         Button _registerBtn = (Button) getView().findViewById(R.id.register_register_btn);
         _registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class RegisterFragment extends Fragment {
         });
     }
 
-    void registerNewUser(){
+    void registerNewUser() {
         EditText _email = (EditText) getView().findViewById(R.id.register_email);
         EditText _password = (EditText) getView().findViewById(R.id.register_password);
         EditText _re_password = (EditText) getView().findViewById(R.id.register_re_password);
@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
                     Toast.LENGTH_SHORT
             ).show();
             Log.d("REGISTER", "SOME FIELDS ARE EMPTY");
-        } else if (_passwordStr.length() < 6){
+        } else if (_passwordStr.length() < 6) {
             Toast.makeText(
                     getActivity(),
                     "รหัสผ่านต้องมีความยาวตั้งแต่ 6 ตัวอักษรขึ้นไป",
@@ -81,7 +81,7 @@ public class RegisterFragment extends Fragment {
                     "รหัสผ่านไม่ตรงกัน",
                     Toast.LENGTH_SHORT
             ).show();
-            Log.d("REGISTER","PASSWORD AND RE-PASSWORD ARE NOT EQUAL");
+            Log.d("REGISTER", "PASSWORD AND RE-PASSWORD ARE NOT EQUAL");
         } else {
             fbAuth.createUserWithEmailAndPassword(_emailStr, _passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
@@ -91,8 +91,8 @@ public class RegisterFragment extends Fragment {
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onFailure(@NonNull Exception e){
-                    Toast.makeText(getActivity(), "ERROR = " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), "อีเมลไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -102,7 +102,7 @@ public class RegisterFragment extends Fragment {
         _user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Log.d("REGISTER","GO TO LOG IN");
+                Log.d("REGISTER", "GO TO LOG IN");
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
@@ -112,7 +112,7 @@ public class RegisterFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "ERROR = " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "อีเมลไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -66,36 +66,48 @@ public class WeightFormFragment extends Fragment {
                 String _weightString = _weight.getText().toString();
                 String _uid = _auth.getCurrentUser().getUid();
 
-                Weight _data = new Weight(
-                        _dateString, Integer.valueOf(_weightString), "UP"
-                );
+                if (!_dateString.isEmpty() && !_weightString.isEmpty()) {
 
-                _firestore.collection("myfitness")
-                        .document(_uid)
-                        .collection("weight")
-                        .document(_dateString)
-                        .set(_data)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
-                                Toast.makeText(
-                                        getActivity(),
-                                        "บันทึกเสร็จสิ้น",
-                                        Toast.LENGTH_SHORT
-                                ).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(
-                                getActivity(),
-                                "ERROR",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                    }
-                });
+                    Weight _data = new Weight(
+                            _dateString, Integer.valueOf(_weightString), ""
+                    );
 
+                    _firestore.collection("myfitness")
+                            .document(_uid)
+                            .collection("weight")
+                            .document(_dateString)
+                            .set(_data)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    getActivity()
+                                            .getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.main_view, new WeightFragment())
+                                            .addToBackStack(null).commit();
+                                    Toast.makeText(
+                                            getActivity(),
+                                            "บันทึกเสร็จสิ้น",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(
+                                    getActivity(),
+                                    "ERROR",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(
+                            getActivity(),
+                            "กรุณากรอกข้อมูลให้ครบถ้วน",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
             }
         });
     }

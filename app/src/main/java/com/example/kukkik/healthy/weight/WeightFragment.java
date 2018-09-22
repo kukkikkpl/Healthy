@@ -42,10 +42,7 @@ public class WeightFragment extends Fragment {
         weights.add(new Weight("02 Jan 2018", 62, "DOWN"));
         weights.add(new Weight("03 Jan 2018", 64, "UP")); */
         getWeightList();
-
         initAddWeightBtn();
-
-
     }
 
     @Nullable
@@ -54,33 +51,53 @@ public class WeightFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_weight, container, false);
     }
 
-    void initAddWeightBtn(){
+    void initAddWeightBtn() {
         TextView _backBtn = (TextView) getView().findViewById(R.id.weight_add_weight_btn);
         _backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new WeightFormFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
 
-    void getWeightList() {
+    private void getWeightList() {
         String _uid = _auth.getCurrentUser().getUid();
         _firestore.collection("myfitness").document(_uid).collection("weight")
-                .orderBy("date", Query.Direction.DESCENDING)
+                .orderBy("date", Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        weights.clear();
                         if (task.isSuccessful()) {
+                            int countLoop = 0;
+                            int checkWeight = 0;
+                            String status = "";
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String date = document.getData().get("date").toString();
                                 int weight = Integer.parseInt(document.getData().get("weight").toString());
-                                String status = document.getData().get("status").toString();
+                                if (countLoop != 0) {
+                                    if (checkWeight > weight) {
+                                        status = "DOWN";
+                                    } else if (checkWeight < weight) {
+                                        status = "UP";
+                                    } else if (checkWeight == weight) {
+                                        status = "";
+                                    }
+                                    //String status = document.getData().get("status").toString();
+                                }
+                                checkWeight = weight;
                                 weights.add(new Weight(date, weight, status));
                                 ListView _weightList = (ListView) getView().findViewById(R.id.weight_list);
                                 WeightAdapter _weightAdapter = new WeightAdapter(getActivity(), R.layout.fragment_weight_item, weights);
                                 _weightList.setAdapter(_weightAdapter);
+                                countLoop += 1;
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

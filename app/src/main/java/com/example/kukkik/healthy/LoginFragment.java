@@ -35,9 +35,8 @@ public class LoginFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fbAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = fbAuth.getCurrentUser();
-            initLoginBtn();
-            initRegisterBtn();
+        initLoginBtn();
+        initRegisterBtn();
 
     }
 
@@ -69,7 +68,11 @@ public class LoginFragment extends Fragment {
         _registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).addToBackStack(null).commit();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new RegisterFragment())
+                        .addToBackStack(null).commit();
                 Log.d("USER", "GO TO REGISTER");
             }
         });
@@ -78,30 +81,38 @@ public class LoginFragment extends Fragment {
 
     private void signIn(String email, String password) {
 
-            fbAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-                    FirebaseUser user = fbAuth.getCurrentUser();
-                    if (user.isEmailVerified()) {
-                        Log.d("USER", "GO TO MENU");
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
-                    }
-                    else {
-                        Toast.makeText(
-                                getActivity(),
-                                "User นี้ยังไม่ได้ทำการ Confirm Email",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        Log.d("USER", "EMAIL IS NOT VERIFIED");
-                        fbAuth.signOut();
-                    }
+        fbAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = fbAuth.getCurrentUser();
+                if (user.isEmailVerified()) {
+                    Log.d("USER", "GO TO MENU");
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new MenuFragment())
+                            .addToBackStack(null).commit();
+                } else {
+                    Toast.makeText(
+                            getActivity(),
+                            "User นี้ยังไม่ได้ทำการ Confirm Email",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    Log.d("USER", "EMAIL IS NOT VERIFIED");
+                    fbAuth.signOut();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("USER", "ERROR IN SIGNIN");
-                }
-            });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(
+                        getActivity(),
+                        "ชื่อ User หรือรหัสผ่านไม่ถูกต้อง",
+                        Toast.LENGTH_SHORT
+                ).show();
+                Log.d("USER", "ERROR IN SIGNIN");
+            }
+        });
 
     }
 
