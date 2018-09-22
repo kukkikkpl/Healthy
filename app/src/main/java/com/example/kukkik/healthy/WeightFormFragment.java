@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
  * Created by LAB203_40 on 10/9/2561.
  */
 
-public class WeightFormFragment extends Fragment{
+public class WeightFormFragment extends Fragment {
 
     FirebaseFirestore _firestore;
     FirebaseAuth _auth;
@@ -45,7 +45,7 @@ public class WeightFormFragment extends Fragment{
         initSaveBtn();
     }
 
-    void initBackBtn(){
+    void initBackBtn() {
         TextView _backBtn = (TextView) getView().findViewById(R.id.weight_form_back_btn);
         _backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class WeightFormFragment extends Fragment{
         });
     }
 
-    void initSaveBtn(){
+    void initSaveBtn() {
         Button _saveBtn = (Button) getView().findViewById(R.id.weight_form_save_btn);
         _saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,27 +70,32 @@ public class WeightFormFragment extends Fragment{
                         _dateString, Integer.valueOf(_weightString), "UP"
                 );
 
-                 _firestore.collection("myfitness")
+                _firestore.collection("myfitness")
                         .document(_uid)
                         .collection("weight")
                         .document(_dateString)
                         .set(_data)
-                        .addOnSuccessListener(new OnSuccessListener<Void>(){
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
+                                Toast.makeText(
+                                        getActivity(),
+                                        "บันทึกเสร็จสิ้น",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(
+                                getActivity(),
+                                "ERROR",
+                                Toast.LENGTH_SHORT
+                        ).show();
                     }
-                }).addOnFailureListener(new OnFailureListener(){
-                     @Override
-                     public void onFailure(@NonNull Exception e) {
+                });
 
-                     }
-                 });
-                Toast.makeText(
-                        getActivity(),
-                        "บันทึกเสร็จสิ้น",
-                        Toast.LENGTH_SHORT
-                ).show();
             }
         });
     }
