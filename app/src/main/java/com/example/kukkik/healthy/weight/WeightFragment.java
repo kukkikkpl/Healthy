@@ -92,6 +92,7 @@ public class WeightFragment extends Fragment {
                                 }
                                 checkWeight = weight;
                                 weights.add(new Weight(date, weight, status));
+                                Log.e("WEIGHT", String.valueOf(R.id.weight_list));
                                 ListView _weightList = (ListView) getView().findViewById(R.id.weight_list);
                                 WeightAdapter _weightAdapter = new WeightAdapter(getActivity(), R.layout.fragment_weight_item, weights);
                                 _weightList.setAdapter(_weightAdapter);

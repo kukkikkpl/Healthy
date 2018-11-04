@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -23,18 +23,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20:00"
-                android:textSize="35dp"/>
+                android:textSize="30dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" - "
-                android:textSize="35dp"/>
+                android:textSize="30dp"/>
             <TextView
                 android:id="@+id/sleep_item_wakeup_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8:00"
-                android:textSize="35dp"/>
+                android:textSize="30dp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -46,6 +46,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:text="10:00"
-        android:textSize="45dp" />
+        android:textSize="35dp" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

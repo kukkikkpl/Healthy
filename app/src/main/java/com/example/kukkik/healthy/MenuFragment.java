@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.kukkik.healthy.sleep.SleepFragment;
 import com.example.kukkik.healthy.weight.WeightFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +34,7 @@ public class MenuFragment extends Fragment {
         menu.clear();
         menu.add("BMI");
         menu.add("Weight");
+        menu.add("Sleep");
         menu.add("Sign out");
 
         ListView menuList = (ListView) getView().findViewById(R.id.menu_list);
@@ -65,6 +67,13 @@ public class MenuFragment extends Fragment {
                             .getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_view, new LoginFragment())
+                            .addToBackStack(null).commit();
+                } else if (menu.get(position).equals("Sleep")) {
+                    Log.d("USER", "SLEEP");
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new SleepFragment())
                             .addToBackStack(null).commit();
                 }
                 //menu.add("new value");
