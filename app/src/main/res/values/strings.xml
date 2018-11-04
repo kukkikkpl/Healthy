@@ -9,4 +9,7 @@
     <string name="weight">Weight</string>
     <string name="weight_form_weight">น้ำหนัก (kg)</string>
     <string name="weight_form_date">วันที่ชั่ง</string>
+    <string name="sleep_form_date">วันที่</string>
+    <string name="sleep_form_sleep_time">เวลาเข้านอน</string>
+    <string name="sleep_form_wakeup_time">เวลาตื่น</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.kukkik.healthy;
+package com.example.kukkik.healthy.weight;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kukkik.healthy.weight.Weight;
+import com.example.kukkik.healthy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.example.kukkik.healthy.weight.WeightFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
