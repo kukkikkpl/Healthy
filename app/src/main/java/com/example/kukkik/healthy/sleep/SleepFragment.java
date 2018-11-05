@@ -1,6 +1,8 @@
 package com.example.kukkik.healthy.sleep;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,26 @@ public class SleepFragment extends Fragment {
             SleepAdapter _sleepAdapter = new SleepAdapter(getActivity(), R.layout.fragment_sleep_item, sleeps);
             ListView _sleepList = (ListView) getView().findViewById(R.id.sleep_list);
             _sleepList.setAdapter(_sleepAdapter);
+            _sleepList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int sleepSize = sleeps.size();
+                    Bundle bundle = new Bundle();
+                    int columnId = position*(-1)+sleepSize;
+                    bundle.putInt("id", columnId);
+                    bundle.putString("date", sleeps.get(position).getDate());
+                    bundle.putString("sleep_time", sleeps.get(position).getSleepTime());
+                    bundle.putString("wakeup_time", sleeps.get(position).getWakeupTime());
+                    SleepFormFragment sleepForm = new SleepFormFragment();
+                    sleepForm.setArguments(bundle);
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, sleepForm)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
     }
 

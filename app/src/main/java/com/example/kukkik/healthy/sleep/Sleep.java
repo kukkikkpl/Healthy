@@ -1,6 +1,7 @@
 package com.example.kukkik.healthy.sleep;
 
 public class Sleep {
+    private String id;
     private String date;
     private String sleepTime;
     private String wakeupTime;
@@ -27,5 +28,13 @@ public class Sleep {
 
     public void setWakeupTime(String wakeupTime) {
         this.wakeupTime = wakeupTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

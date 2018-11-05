@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.kukkik.healthy.sleep.Sleep;
@@ -63,5 +64,18 @@ public class DBHelper extends SQLiteOpenHelper{
         }
         sqLiteDatabase.close();
         return sleeps;
+    }
+
+    public void updateSleep(Sleep sleep) {
+        sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("date", sleep.getDate());
+        values.put("sleep_time", sleep.getSleepTime());
+        values.put("wakeup_time", sleep.getWakeupTime());
+        sqLiteDatabase.update("sleep",
+                values,
+                "id = ? ",
+                new String[] { String.valueOf(sleep.getId()) });
+        sqLiteDatabase.close();
     }
 }
